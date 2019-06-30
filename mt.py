@@ -14,9 +14,9 @@ import keras_preprocessing
 from keras_preprocessing import text
 #from keras.preprocessing.text import tokenizer_from_json
 
-def quick_view(path, limit=10):
+def view(path, limit=10):
 	with open('mini_corpus.txt') as lines:
-	  for i,line in enumerate(i,lines):
+	  for i,line in enumerate(lines):
 	    if i < limit:
 	    	print(line)
 	    else:

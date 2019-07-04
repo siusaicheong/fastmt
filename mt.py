@@ -327,16 +327,16 @@ def plot_attention(attention, sentence, predicted_sentence):
 
     plt.show()
     
-def translate(sentence,lang,model='./content/drive/My Drive/training_checkpoints'):
-	checkpoint_dir = model
-    result, sentence, attention_plot = evaluate(sentence,lang,checkpoint_dir)
-
-    print('Input: %s' % (sentence))
-    print('Predicted translation: {}'.format(result))
+def translate(sentence,lang,checkpoint_dir='./content/drive/My Drive/training_checkpoints'):
+	result, sentence, attention_plot = evaluate(sentence,lang,checkpoint_dir)
+	
+	print('Input: %s' % (sentence))
+	print('Predicted translation: {}'.format(result))
 
     #attention_plot = attention_plot[:len(result.split(' ')), :len(sentence.split(' '))]
     #plot_attention(attention_plot, sentence.split(' '), result.split(' '))
 
+'''
 def get_sample_corpus(lang='cmn'):
 	if lang=='eng':
 		print("Assuming that you need an English-Chinese corpus")
@@ -345,6 +345,7 @@ def get_sample_corpus(lang='cmn'):
 	path_to_file = os.path.dirname(path_to_zip)+"/"+lang+"-eng/"+lang+".txt"
 	print("Corpus saved to the following path: "+path_to_file)
 	return path_to_file
+'''
 
 def reverse_corpus(path_to_file):
 	new_path_to_file = 'rev_'+path_to_file
@@ -392,16 +393,13 @@ def preprocess_data(src, targ, path_to_file='./mini_corpus.txt', num_examples = 
 
 	return data
 
-def build_network(data, embedding=256, model='./content/drive/My Drive/training_checkpoints'):
+def build_network(data, embedding_dim=256, checkpoint_dir='./content/drive/My Drive/training_checkpoints'):
 	
 	vocab_inp_size = data['vocab_inp_size']
 	vocab_tar_size = data['vocab_tar_size']
 	targ_lang = data['targ_lang']
 	BATCH_SIZE = data['batch_size']
-
-	embedding_dim = embedding
 	units = 1024
-	checkpoint_dir = model
 
 	encoder = Encoder(vocab_inp_size, embedding_dim, units, BATCH_SIZE)
 

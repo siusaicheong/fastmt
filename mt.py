@@ -1,3 +1,5 @@
+#Read more: https://github.com/tensorflow/docs/blob/master/site/en/r2/tutorials/text/nmt_with_attention.ipynb
+
 from __future__ import absolute_import, division, print_function, unicode_literals
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -327,7 +329,7 @@ def plot_attention(attention, sentence, predicted_sentence):
 
     plt.show()
     
-def translate(sentence,lang,checkpoint_dir='./content/drive/My Drive/training_checkpoints'):
+def translate(sentence,lang,checkpoint_dir='/content/drive/My Drive/training_checkpoints'):
 	result, sentence, attention_plot = evaluate(sentence,lang,checkpoint_dir)
 	
 	print('Input: %s' % (sentence))
@@ -393,7 +395,7 @@ def preprocess_data(src, targ, path_to_file='./mini_corpus.txt', num_examples = 
 
 	return data
 
-def build_network(data, embedding_dim=256, checkpoint_dir='./content/drive/My Drive/training_checkpoints'):
+def build_network(data, checkpoint_dir='/content/drive/My Drive/training_checkpoints', embedding_dim=256):
 	
 	vocab_inp_size = data['vocab_inp_size']
 	vocab_tar_size = data['vocab_tar_size']

@@ -327,14 +327,15 @@ def plot_attention(attention, sentence, predicted_sentence):
 
     plt.show()
     
-def translate(sentence,lang,checkpoint_dir='./training_checkpoints'):
+def translate(sentence,lang,model='./content/drive/My Drive/training_checkpoints'):
+	checkpoint_dir = model
     result, sentence, attention_plot = evaluate(sentence,lang,checkpoint_dir)
 
     print('Input: %s' % (sentence))
     print('Predicted translation: {}'.format(result))
 
-    attention_plot = attention_plot[:len(result.split(' ')), :len(sentence.split(' '))]
-    plot_attention(attention_plot, sentence.split(' '), result.split(' '))
+    #attention_plot = attention_plot[:len(result.split(' ')), :len(sentence.split(' '))]
+    #plot_attention(attention_plot, sentence.split(' '), result.split(' '))
 
 def get_sample_corpus(lang='cmn'):
 	if lang=='eng':
@@ -391,16 +392,16 @@ def preprocess_data(src, targ, path_to_file='./mini_corpus.txt', num_examples = 
 
 	return data
 
-def build_network(data):
+def build_network(data, embedding=256, model='./content/drive/My Drive/training_checkpoints'):
 	
 	vocab_inp_size = data['vocab_inp_size']
 	vocab_tar_size = data['vocab_tar_size']
 	targ_lang = data['targ_lang']
 	BATCH_SIZE = data['batch_size']
 
-	embedding_dim = 256
+	embedding_dim = embedding
 	units = 1024
-	checkpoint_dir = './training_checkpoints'
+	checkpoint_dir = model
 
 	encoder = Encoder(vocab_inp_size, embedding_dim, units, BATCH_SIZE)
 
@@ -481,7 +482,7 @@ def train_model(data,network,EPOCHS=10,save_freq=2):
 
 
 
-def train(src, targ, path_to_file='./mini_corpus.txt',num_examples=20000,checkpoint_dir = './training_checkpoints',EPOCHS = 10):
+def train(src, targ, path_to_file='./mini_corpus.txt',num_examples=20000,checkpoint_dir = './content/drive/My Drive/training_checkpoints',EPOCHS = 10):
 	#path_to_file = '/content/mini_corpus.txt'
 	#num_examples = 20000
 
